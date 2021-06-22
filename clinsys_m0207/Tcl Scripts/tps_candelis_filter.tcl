@@ -12,6 +12,8 @@
 # History:    
 # Nov 06, 2017  Aaron Andersen      Original code
 # Jul 30, 2018 Brian CHapman        Update to use DSN.tbl, overhaul code
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 proc tps_candelis_filter { args } {
 
     keylget args MODE mode
