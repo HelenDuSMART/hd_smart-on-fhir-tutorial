@@ -44,8 +44,7 @@
             lname = patient.name[0].family;
           }
           
-          var type = allergy.type;
-          
+          var type = '';
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('85354-9'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
