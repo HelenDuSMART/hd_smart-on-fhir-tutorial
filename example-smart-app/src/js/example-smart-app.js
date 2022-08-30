@@ -12,10 +12,8 @@
         var patient = smart.patient;
         var pt = patient.read();
         var allergy = smart.patient.api.fetchAll({
-                    type: 'AllergyIntolerance',
-                    query: {
-                      type
-                    }
+                    type: 'AllergyIntoleranceType',
+                   
                   });
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
