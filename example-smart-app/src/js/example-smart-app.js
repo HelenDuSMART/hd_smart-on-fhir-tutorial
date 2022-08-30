@@ -44,7 +44,7 @@
             lname = patient.name[0].family;
           }
           
-          var type = '';
+          //var type = '';
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('85354-9'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
@@ -96,7 +96,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       tmp: {value: ''},
-      type: {value: ''},
+      //type: {value: ''},
     };
   }
 
@@ -141,7 +141,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#tmp').html(p.tmp);
-    $('#type').html(p.type);
+    //$('#type').html(p.type);
   };
 
 })(window);
