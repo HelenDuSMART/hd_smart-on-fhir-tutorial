@@ -33,9 +33,9 @@
 
           if (typeof patient.name[0] !== 'undefined') {
             fname = patient.name[0].given.join(' ');
-            
+            lname = patient.name[0].family;
           }
-          lname = patient.name.family;
+          
 
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('55284-4'),'8480-6');
