@@ -11,6 +11,12 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
+        var allergy = smart.patient.api.fetchAll({
+                    type: 'AllergyIntolerance',
+                    query: {
+                      type
+                    }
+                  });
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -22,9 +28,9 @@
                     }
                   });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, allergy).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv).done(function(patient, obv, allergy) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -36,7 +42,8 @@
             lname = patient.name[0].family;
           }
           
-
+          var type = allergy.type;
+          
           var height = byCodes('8302-2');
           var systolicbp = getBloodPressureValue(byCodes('85354-9'),'8480-6');
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
@@ -47,6 +54,7 @@
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
           p.gender = gender;
+          p.type = type;
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
@@ -87,6 +95,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       tmp: {value: ''},
+      type: {value: ''},
     };
   }
 
@@ -131,6 +140,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#tmp').html(p.tmp);
+    $('#type').html(p.type);
   };
 
 })(window);
