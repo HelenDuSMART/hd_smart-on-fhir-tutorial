@@ -16,7 +16,7 @@
                     query: {
                       code: {
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|85354-9',
-                              'http://loinc.org|2085-9',
+                              'http://loinc.org|2085-9', 'http://loinc.org|8310-5'
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     }
@@ -42,6 +42,7 @@
           var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'8462-4');
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
+          var tmp = byCodes('8310-5');
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
