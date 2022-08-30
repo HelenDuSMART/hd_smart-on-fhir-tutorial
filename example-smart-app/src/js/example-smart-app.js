@@ -16,7 +16,7 @@
                     query: {
                       code: {
                         $or: ['http://loinc.org|8302-2', 'http://loinc.org|85354-9',
-                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+                              'http://loinc.org|2085-9',
                               'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
                       }
                     }
@@ -38,10 +38,10 @@
           
 
           var height = byCodes('8302-2');
-          var systolicbp = getBloodPressureValue(byCodes('55284-4'),'85354-9');
-          var diastolicbp = getBloodPressureValue(byCodes('55284-4'),'85354-9');
-          var hdl = byCodes('2085-9');
-          var ldl = byCodes('2089-1');
+          var systolicbp = getBloodPressureValue(byCodes('85354-9'),'85354-9');
+          var diastolicbp = getBloodPressureValue(byCodes('85354-9'),'85354-9');
+          var hdl = byCodes('85354-9');
+          var ldl = byCodes('85354-9');
 
           var p = defaultPatient();
           p.birthdate = patient.birthDate;
