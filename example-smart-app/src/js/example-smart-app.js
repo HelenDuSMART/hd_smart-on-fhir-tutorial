@@ -34,7 +34,7 @@
           //console.log(allergy)
           var arrayLength = allergy.length;
           for (var i = 0; i < arrayLength; i++) {
-            console.log(allergy[i]);
+            console.log(allergy[i]); 
           }
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
