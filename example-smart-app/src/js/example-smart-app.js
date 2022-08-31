@@ -31,11 +31,28 @@
         $.when(pt, obv, allergy).fail(onError);
 
         $.when(pt, obv, allergy).done(function(patient, obv, allergy) {
-          //console.log(allergy);
-          var arrayLength = allergy.length;
-          for (var i = 0; i < arrayLength; i++) {
-            console.log(allergy[i]); 
+         
+          
+          var allergiesOut = "";
+          var allergyLen = allergy.length;
+          console.log(allergyLen);
+          for(var i=0;i<allergyLen;i++){
+            var reactions = [];
+            //console.log(allergies[i].code.text);
+            if(allergies[i].reaction !== undefined){              
+              for(var j=0,jLen=allergies[i].reaction.length;j<jLen;j++){
+                reactions.push(allergies[i].reaction[j].manifestation[0].text+" ("+allergies[i].reaction[j].severity+") ");
+                console.log("reaction: "+allergies[i].reaction[j].manifestation[0].text+" ("+allergies[i].reaction[j].severity+") ");
+              }
+              allergiesOut += "<tr><td>Allergy: "+allergies[i].code.text+"</td><td>Reactions: "+reactions.join(", ")+"</td></tr>";
+              console.log("Allergy: "+allergies[i].code.text+"\t\t\tReactions: "+reactions.join(", "));
+            }
+            if(allergyLen === 0){
+                allergiesOut =+ "No Known Allergies";
+            }
           }
+          allergiesWithTable =+ "<table>"+allergiesOut+"</table>";
+          
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -74,7 +91,7 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.tmp = getQuantityValueAndUnit(tmp[0]);
-
+          p.allergy = allergiesWithTable;
           ret.resolve(p);
         });
       } else {
@@ -99,7 +116,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       tmp: {value: ''},
-      //type: {value: ''},
+      type: {value: ''},
     };
   }
 
@@ -144,7 +161,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#tmp').html(p.tmp);
-    //$('#type').html(p.type);
+    $('#type').html(p.allergy);
   };
 
 })(window);
