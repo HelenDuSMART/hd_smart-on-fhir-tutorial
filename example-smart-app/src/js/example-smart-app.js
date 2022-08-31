@@ -39,13 +39,13 @@
           for(var i=0;i<allergyLen;i++){
             var reactions = [];
             //console.log(allergies[i].code.text);
-            if(allergies[i].reaction !== undefined){              
-              for(var j=0,jLen=allergies[i].reaction.length;j<jLen;j++){
-                reactions.push(allergies[i].reaction[j].manifestation[0].text+" ("+allergies[i].reaction[j].severity+") ");
-                console.log("reaction: "+allergies[i].reaction[j].manifestation[0].text+" ("+allergies[i].reaction[j].severity+") ");
+            if(allergy[i].reaction !== undefined){              
+              for(var j=0,jLen=allergy[i].reaction.length;j<jLen;j++){
+                reactions.push(allergy[i].reaction[j].manifestation[0].text+" ("+allergy[i].reaction[j].severity+") ");
+                console.log("reaction: "+allergy[i].reaction[j].manifestation[0].text+" ("+allergy[i].reaction[j].severity+") ");
               }
-              allergiesOut += "<tr><td>Allergy: "+allergies[i].code.text+"</td><td>Reactions: "+reactions.join(", ")+"</td></tr>";
-              console.log("Allergy: "+allergies[i].code.text+"\t\t\tReactions: "+reactions.join(", "));
+              allergiesOut += "<tr><td>Allergy: "+allergy[i].code.text+"</td><td>Reactions: "+reactions.join(", ")+"</td></tr>";
+              console.log("Allergy: "+allergy[i].code.text+"\t\t\tReactions: "+reactions.join(", "));
             }
             if(allergyLen === 0){
                 allergiesOut =+ "No Known Allergies";
