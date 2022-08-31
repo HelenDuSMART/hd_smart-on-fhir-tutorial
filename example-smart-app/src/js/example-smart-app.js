@@ -32,26 +32,24 @@
 
         $.when(pt, obv, allergy).done(function(patient, obv, allergy) {
          
+          p.allergyIntolerance = '<table>';
+          allergy.forEach(function(ai) {
+            p.allergyIntolerance += '<tr><td>' + ai.code.text + '</td><td>'
+            if(typeof ai.reaction != 'undefined') {
+              ai.reaction.forEach(function(ri) {
+                ri.manifestation.forEach(function(mi) {
+                  p.allergyIntolerance += mi.text + ' (' + ri.severity + ')<br />';
+                });
+              });
+            } else {
+              p.allergyIntolerance += '&nbsp;';
+            }
+            p.allergyIntolerance += '</td></tr>';            
+          });
+          p.allergyIntolerance += '</table>';
+          console.log(allergy);
           
-          var allergiesOut = "";
-          var allergyLen = allergy.length;
-          console.log(allergyLen);
-          for(var i=0;i<allergyLen;i++){
-            var reactions = [];
-            //console.log(allergies[i].code.text);
-            if(allergy[i].reaction !== undefined){              
-              for(var j=0,jLen=allergy[i].reaction.length;j<jLen;j++){
-                reactions.push(allergy[i].reaction[j].manifestation[0].text+" ("+allergy[i].reaction[j].severity+") ");
-                console.log("reaction: "+allergy[i].reaction[j].manifestation[0].text+" ("+allergy[i].reaction[j].severity+") ");
-              }
-              allergiesOut += "<tr><td>Allergy: "+allergy[i].code.text+"</td><td>Reactions: "+reactions.join(", ")+"</td></tr>";
-              console.log("Allergy: "+allergy[i].code.text+"\t\t\tReactions: "+reactions.join(", "));
-            }
-            if(allergyLen === 0){
-                allergiesOut =+ "No Known Allergies";
-            }
-          }
-          allergiesWithTable =+ "<table>"+allergiesOut+"</table>";
+          
           
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
@@ -91,7 +89,7 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.tmp = getQuantityValueAndUnit(tmp[0]);
-          p.allergy = allergiesWithTable;
+          
           ret.resolve(p);
         });
       } else {
@@ -161,7 +159,7 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
     $('#tmp').html(p.tmp);
-    $('#type').html(p.allergy);
+    $('#type').html(p.allergyIntolerance);
   };
 
 })(window);
