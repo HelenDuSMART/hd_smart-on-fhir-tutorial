@@ -31,23 +31,8 @@
         $.when(pt, obv, allergy).fail(onError);
 
         $.when(pt, obv, allergy).done(function(patient, obv, allergy) {
-         
-          p.allergyIntolerance = '<table>';
-          allergy.forEach(function(ai) {
-            p.allergyIntolerance += '<tr><td>' + ai.code.text + '</td><td>'
-            if(typeof ai.reaction != 'undefined') {
-              ai.reaction.forEach(function(ri) {
-                ri.manifestation.forEach(function(mi) {
-                  p.allergyIntolerance += mi.text + ' (' + ri.severity + ')<br />';
-                });
-              });
-            } else {
-              p.allergyIntolerance += '&nbsp;';
-            }
-            p.allergyIntolerance += '</td></tr>';            
-          });
-          p.allergyIntolerance += '</table>';
-          console.log(allergy);
+         var allergyIntolerance ='';
+          
           
           
           
@@ -89,6 +74,23 @@
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.tmp = getQuantityValueAndUnit(tmp[0]);
+          
+          p.allergyIntolerance = '<table>';
+          allergy.forEach(function(ai) {
+            p.allergyIntolerance += '<tr><td>' + ai.code.text + '</td><td>'
+            if(typeof ai.reaction != 'undefined') {
+              ai.reaction.forEach(function(ri) {
+                ri.manifestation.forEach(function(mi) {
+                  p.allergyIntolerance += mi.text + ' (' + ri.severity + ')<br />';
+                });
+              });
+            } else {
+              p.allergyIntolerance += '&nbsp;';
+            }
+            p.allergyIntolerance += '</td></tr>';            
+          });
+          p.allergyIntolerance += '</table>';
+          console.log(allergy);
           
           ret.resolve(p);
         });
